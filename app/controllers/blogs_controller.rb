@@ -1,22 +1,24 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update]
+  before_action :set_blog, only: %i[show edit update destroy]
 
   def index
     @blogs = Blog.all
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @blog = Blog.new
   end
 
-  def edit; end
+  def edit
+  end
 
   def create
     @blog = Blog.new(blog_params)
     if @blog.save
-      redirect_to @blog, notice: 'Blog was successfully created.'
+      redirect_to @blog, notice: "Blog was successfully created."
     else
       render :new
     end
@@ -24,7 +26,7 @@ class BlogsController < ApplicationController
 
   def update
     if @blog.update(blog_params)
-      redirect_to @blog, notice: 'Blog was successfully updated.'
+      redirect_to @blog, notice: "Blog was successfully updated."
     else
       render :edit
     end
@@ -32,7 +34,7 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog.destroy
-    redirect_to blogs_url, notice: 'Blog was successfully destroyed.'
+    redirect_to blogs_url, notice: "Blog was successfully destroyed."
   end
 
   private
@@ -42,6 +44,6 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title)
+    params.require(:blog).permit(:title, :content)
   end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :blog do
-    resources :comments, only: [:create, :destroy]
+  resources :blogs do
+    resources :comments, only: %i[create destroy]
   end
 end
